@@ -1,84 +1,148 @@
-# 🔐 **Cipher Vault — Python CLI Password Manager**
+# Cipher Vault — Python CLI Password Manager
 
-Cipher Vault is a simple, lightweight **Python command-line password manager** that stores passwords in **XOR-encrypted form**.  
-It allows you to add, update, delete, list, and securely access passwords saved for different websites.
+## Overview
+Cipher Vault is a command-line password management tool built using Python.  
+The application allows users to securely store and manage credentials for different websites using a lightweight XOR-based encryption mechanism.
 
-Passwords are **never stored in plain text** — they are encrypted and can only be decrypted using your **PIN**.
+Passwords are never stored in plain text. Instead, they are encrypted before being written to persistent storage and can only be decrypted using a user-provided PIN.
 
----
-
-## ⭐ **Features**
-
-- 🔒 **Secure XOR-based encryption**
-- 📄 Store website name, username, and encrypted password
-- ➕ Add new passwords  
-- ✏️ Update existing passwords  
-- ❌ Delete saved passwords  
-- 👁 View/decrypt password *(PIN required)*  
-- 📁 Auto-creates & manages `password_manager.txt` JSON file  
-- 🧠 Simple, easy-to-understand reversible encryption  
-- 🖥 Fully terminal-based CLI app
+This project demonstrates concepts such as command-line application design, basic cryptographic logic, file-based data persistence, and modular program structure.
 
 ---
 
-## 🛠 **How the Encryption Works**
+## Key Features
 
-Cipher Vault uses a reversible XOR cipher:
-  encrypted_value = ord(character) ^ key
-  original_character = chr(encrypted_value ^ key)
-- `key = 123`  
-- Each character of the password is encrypted to a number  
-- Only someone with the correct **PIN (6969)** can decrypt it  
-
-This technique is lightweight and perfect for learning basic cryptography.
+- Secure storage of website credentials
+- XOR-based reversible encryption for password protection
+- Add, update, delete, and retrieve stored credentials
+- PIN-based authentication for password decryption
+- Persistent storage using JSON file handling
+- Menu-driven command-line interface
+- Automatic file creation for first-time execution
 
 ---
 
-## 📁 **Project Structure**
+## Technology Stack
+
+- Language: Python
+- Data Storage: JSON file
+- Interface: Command-Line Interface (CLI)
+
+---
+
+## Encryption Approach
+
+Cipher Vault implements a lightweight reversible XOR encryption technique.
+
+Encryption logic:
+
+
+encrypted_value = ord(character) ^ key
+original_character = chr(encrypted_value ^ key)
+
+
+Each character of the password is converted to an encrypted integer value before being stored.
+
+A PIN is required to decrypt and display the original password, ensuring that stored credentials cannot be directly read from the storage file.
+
+Note: This encryption method is implemented for educational purposes to demonstrate fundamental cryptographic concepts.
+
+---
+
+## Project Structure
+
 
 cipher-vault/
 │
-├── cipher_vault.py # Main project code
-├── password_manager.txt # JSON file storing encrypted passwords
+├── cipher_vault.py # Main application logic
+├── password_manager.txt # JSON file storing encrypted credentials
 └── README.md # Project documentation
 
 
 ---
 
-## ▶️ **How to Run**
+## Running the Application
 
-1. Install Python (3.x)
-2. Download or clone this repository
-3. Open a terminal in the project directory
-4. Run:
-    python cipher_vault.py
-5. Use menu options (1–6) to manage your passwords.
+### Requirements
+Python 3.x installed
+
+### Steps
+
+Clone the repository:
+
+
+git clone https://github.com/YOUR-USERNAME/cipher-vault.git
+
+
+Navigate to the project directory:
+
+
+cd cipher-vault
+
+
+Run the program:
+
+
+python cipher_vault.py
+
 
 ---
 
-##  **Menu Options**
+## Application Menu
 
-1. List all saved website passwords
-2. Add a new password
-3. Update an existing password
-4. Delete a password
-5. Access (View) a password ← requires PIN
+The program provides the following operations:
+
+1. List all saved website credentials  
+2. Add a new credential  
+3. Update an existing credential  
+4. Delete stored credential  
+5. View decrypted password (PIN required)  
 6. Exit the program
 
+---
 
-##  **Example Stored Data (`password_manager.txt`)**
-```json
+## Example Stored Data
+
+Example JSON entry in `password_manager.txt`:
+
+
 [
-    {
-        "website": "google.com",
-        "username": "bhushan",
-        "password": [171, 85, 90]
-    }
+{
+"website": "google.com",
+"username": "bhushan",
+"password": [171, 85, 90]
+}
 ]
-**password is stored in encrypted integer form — never as plain text.
 
-👨‍💻 Author
 
-Bhushan Bhutada
-Python beginner exploring encryption techniques and building practical CLI tools.
-**
+Passwords are stored as encrypted integer arrays rather than plain text values.
+
+---
+
+## Learning Outcomes
+
+This project demonstrates practical understanding of:
+
+- CLI-based application development
+- File handling and JSON data management
+- Basic encryption techniques
+- Modular Python program design
+- Data persistence in local storage
+
+---
+
+## Author
+
+Bhushan Bhutada  
+Computer Science Engineering Student
+
+---
+
+## Future Improvements
+
+Potential enhancements include:
+
+- Stronger encryption mechanisms
+- Master password authentication
+- Database-backed credential storage
+- Graphical user interface (GUI)

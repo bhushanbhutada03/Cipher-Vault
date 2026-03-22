@@ -1,51 +1,51 @@
 # Cipher Vault — Python CLI Password Manager
 
 ## Overview
-Cipher Vault is a command-line password management tool developed using Python.  
-The application allows users to securely store and manage credentials for multiple websites using a lightweight XOR-based encryption mechanism.
 
-Passwords are never stored in plain text. Instead, they are encrypted before being written to persistent storage and can only be decrypted using a user-provided PIN.
+Cipher Vault is a command-line password manager built using Python.
 
-This project demonstrates concepts such as command-line application design, basic cryptographic logic, file-based data persistence, and modular program structure.
+The project evolved from a basic file-based system to a database-backed application. It allows users to securely store and manage credentials using encryption, with support for CRUD operations and search functionality.
+
+Passwords are never stored in plain text and require a PIN for access.
+
+---
+
+## Project Evolution
+
+This project has two versions:
+
+### 1. JSON Version (Basic)
+
+* Stores data in a local file
+* Uses JSON for persistence
+* Demonstrates file handling and basic encryption
+
+### 2. MySQL Version (Upgraded)
+
+* Uses MySQL database for storage
+* Implements CRUD operations using SQL
+* Adds search functionality
+* Improved structure and real-world relevance
 
 ---
 
 ## Key Features
 
-- Secure storage of website credentials
-- XOR-based reversible encryption for password protection
-- Add, update, delete, and retrieve stored credentials
-- PIN-based authentication for password decryption
-- Persistent storage using JSON file handling
-- Menu-driven command-line interface
-- Automatic file creation for first-time execution
+* Add, update, delete, and view credentials
+* Encrypted password storage (XOR-based)
+* PIN-based password access
+* Search credentials by website
+* Menu-driven CLI interface
+* Database integration (MySQL version)
 
 ---
 
 ## Technology Stack
 
-- Language: Python
-- Data Storage: JSON file
-- Interface: Command-Line Interface (CLI)
-
----
-
-## Encryption Approach
-
-Cipher Vault implements a lightweight reversible XOR encryption technique.
-
-Encryption logic:
-
-```python
-encrypted_value = ord(character) ^ key
-original_character = chr(encrypted_value ^ key)
-```
-
-Each character of the password is converted to an encrypted integer value before being stored.
-
-A PIN is required to decrypt and display the original password, ensuring that stored credentials cannot be directly read from the storage file.
-
-Note: This encryption method is implemented for educational purposes to demonstrate fundamental cryptographic concepts.
+* Language: Python
+* Database: MySQL (for upgraded version)
+* Storage (basic version): JSON
+* Interface: Command-Line Interface (CLI)
 
 ---
 
@@ -54,142 +54,128 @@ Note: This encryption method is implemented for educational purposes to demonstr
 ```
 cipher-vault/
 │
-├── cipher_vault.py        # Main application logic
-├── password_manager.txt   # JSON file storing encrypted credentials
-└── README.md              # Project documentation
+├── json-version/
+│   ├── main.py
+│   └── password_manager.txt
+│
+├── mysql-version/
+│   ├── main.py
+│   ├── db.py
+│
+├── images/
+│   ├── json/
+│   ├── mysql/
+│
+└── README.md
 ```
 
 ---
 
-## Running the Application
+## Setup Instructions (MySQL Version)
 
-### Requirements
-Python 3.x installed
+### 1. Install MySQL
 
-### Steps
-
-Clone the repository:
+### 2. Create Database
 
 ```
-git clone https://github.com/bhushanbhutada03/cipher-vault.git
+CREATE DATABASE cipher_vault;
 ```
 
-Navigate to the project directory:
+### 3. Create Table
 
 ```
-cd cipher-vault
+CREATE TABLE credentials (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    website VARCHAR(255),
+    username VARCHAR(255),
+    password TEXT
+);
 ```
 
-Run the program:
+### 4. Update Database Credentials
+
+Update `db.py`:
 
 ```
-python cipher_vault.py
+host="localhost",
+user="root",
+password="your_password",
+database="cipher_vault"
 ```
 
----
+### 5. Run the Application
 
-## Application Menu
-
-The program provides the following operations:
-
-1. List all saved website credentials  
-2. Add a new credential  
-3. Update an existing credential  
-4. Delete stored credential  
-5. View decrypted password (PIN required)  
-6. Exit the program
+```
+python main.py
+```
 
 ---
 
 ## Demo Screenshots
 
-### Main Menu
+### JSON Version
 
-Below is the main command-line interface of the application:
+Main Menu:
 
-![Main Menu](images/menu.png)
+![JSON Menu](images/json/json-menu.png)
 
-### Accessing a Saved Password
+Accessing Password:
 
-Example of retrieving stored credentials using the PIN:
-
-![Password Access](images/access.png)
+![JSON Access](images/json/json-access.png)
 
 ---
 
-## Example Program Output
+### MySQL Version
 
-```
-===== Cipher Vault =====
+Main Menu:
 
-1. List saved passwords
-2. Add new password
-3. Update existing password
-4. Delete password
-5. Access password
-6. Exit
+![MySQL Menu](images/mysql/mysql-menu.png)
 
-Enter choice: 1
+Database View:
 
-Saved Websites:
-1. google.com
-2. github.com
-```
+![MySQL Database](images/mysql/mysql-database.png)
 
-Accessing a password:
+Accessing Password:
 
-```
-Enter website name: google.com
-Enter PIN: ****
-
-Username: bhushan
-Password: mysecurepassword
-```
+![MySQL Access](images/mysql/mysql-access.png)
 
 ---
 
-## Example Stored Data
+## Encryption Approach
 
-Example JSON entry in `password_manager.txt`:
+This project uses a basic XOR-based reversible encryption method.
 
-```json
-[
-  {
-    "website": "google.com",
-    "username": "bhushan",
-    "password": [171, 85, 90]
-  }
-]
+```
+encrypted = ord(char) ^ key
+decrypted = chr(encrypted ^ key)
 ```
 
-Passwords are stored as encrypted integer arrays rather than plain text values.
+Passwords are stored in encrypted form and converted using JSON for database compatibility.
+
+Note: This method is for learning purposes and not suitable for production use.
 
 ---
 
 ## Learning Outcomes
 
-This project demonstrates practical understanding of:
-
-- CLI-based application development
-- File handling and JSON data management
-- Basic encryption techniques
-- Modular Python program design
-- Data persistence in local storage
-
----
-
-## Author
-
-Bhushan Bhutada  
-Computer Science Engineering Student
+* CLI-based application development
+* File handling and JSON processing
+* Database integration with MySQL
+* CRUD operations using SQL
+* Basic encryption techniques
+* Code modularization and structure improvement
 
 ---
 
 ## Future Improvements
 
-Potential enhancements include:
+* Strong encryption (Fernet)
+* User authentication system
+* Web-based interface using Flask
 
-- Stronger encryption mechanisms
-- Master password authentication
-- Database-backed credential storage
-- Graphical user interface (GUI)
+---
+
+## Author
+
+Bhushan Bhutada
+Computer Engineering Student

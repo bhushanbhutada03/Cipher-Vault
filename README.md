@@ -2,9 +2,9 @@
 
 ## Overview
 
-Cipher Vault is a command-line password manager built using Python.
+Cipher Vault is a password manager built using Python.
 
-The project evolved from a basic file-based system to a database-backed application. It allows users to securely store and manage credentials using encryption, with support for CRUD operations and search functionality.
+The project evolved from a basic file-based system to a database-backed application with a web interface. It allows users to securely store and manage credentials using encryption, with support for CRUD operations and search functionality.
 
 Passwords are never stored in plain text and require a PIN for access.
 
@@ -25,6 +25,7 @@ This project has two versions:
 * Uses MySQL database for storage
 * Implements CRUD operations using SQL
 * Adds search functionality
+* Includes a Streamlit-based web interface
 * Improved structure and real-world relevance
 
 ---
@@ -36,16 +37,17 @@ This project has two versions:
 * PIN-based password access
 * Search credentials by website
 * Menu-driven CLI interface
-* Database integration (MySQL version)
+* Database integration using MySQL
+* Web-based interface using Streamlit
 
 ---
 
 ## Technology Stack
 
 * Language: Python
-* Database: MySQL (for upgraded version)
+* Database: MySQL
 * Storage (basic version): JSON
-* Interface: Command-Line Interface (CLI)
+* Interface: CLI and Streamlit (Web UI)
 
 ---
 
@@ -61,6 +63,8 @@ cipher-vault/
 ├── mysql-version/
 │   ├── main.py
 │   ├── db.py
+│   ├── app.py
+│   ├── requirements.txt
 │
 ├── images/
 │   ├── json/
@@ -94,7 +98,7 @@ CREATE TABLE credentials (
 
 ### 4. Update Database Credentials
 
-Update `db.py`:
+Update `db.py` with your local configuration:
 
 ```
 host="localhost",
@@ -103,10 +107,42 @@ password="your_password",
 database="cipher_vault"
 ```
 
-### 5. Run the Application
+---
+
+## Running the Application
+
+### CLI Version
 
 ```
 python main.py
+```
+
+---
+
+### Streamlit Web App
+
+Navigate to the MySQL version:
+
+```
+cd mysql-version
+```
+
+Install dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+Run the application:
+
+```
+streamlit run app.py
+```
+
+Open in browser:
+
+```
+http://localhost:8501
 ```
 
 ---
@@ -125,7 +161,7 @@ Accessing Password:
 
 ---
 
-### MySQL Version
+### MySQL Version (CLI)
 
 Main Menu:
 
@@ -141,6 +177,18 @@ Accessing Password:
 
 ---
 
+### Streamlit Web UI
+
+Interface:
+
+![Streamlit UI](images/mysql/mysql-streamlit-main.png)
+
+Access Password:
+
+![Streamlit Access](images/mysql/mysql-streamlit-access.png)
+
+---
+
 ## Encryption Approach
 
 This project uses a basic XOR-based reversible encryption method.
@@ -152,7 +200,7 @@ decrypted = chr(encrypted ^ key)
 
 Passwords are stored in encrypted form and converted using JSON for database compatibility.
 
-Note: This method is for learning purposes and not suitable for production use.
+> Note: This method is implemented for learning purposes and is not suitable for production use.
 
 ---
 
@@ -163,6 +211,7 @@ Note: This method is for learning purposes and not suitable for production use.
 * Database integration with MySQL
 * CRUD operations using SQL
 * Basic encryption techniques
+* Building a simple web interface using Streamlit
 * Code modularization and structure improvement
 
 ---
@@ -171,7 +220,7 @@ Note: This method is for learning purposes and not suitable for production use.
 
 * Strong encryption (Fernet)
 * User authentication system
-* Web-based interface using Flask
+* Enhanced UI using Flask or modern frontend frameworks
 
 ---
 

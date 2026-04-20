@@ -7,7 +7,7 @@ Cipher Vault is a password manager built using Python.
 The project evolved from a basic file-based system to a database-backed application with a web interface. It allows users to securely store and manage credentials using encryption, with support for CRUD operations and search functionality.
 
 Passwords are never stored in plain text and require a PIN for access.
-
+ 
 ---
 
 ## Project Evolution

@@ -1,6 +1,6 @@
 import json
 
-key=123
+key=123 
 pin=6969
 
 def helper(passwords):

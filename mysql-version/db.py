@@ -4,10 +4,10 @@ def get_connection():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="root",
+        password="root", 
         database="cipher_vault"
     )
-    
+     
 def insert_password(website, username, password):
     conn = get_connection()
     cursor = conn.cursor()

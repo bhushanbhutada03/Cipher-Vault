@@ -50,7 +50,7 @@ This project has two versions:
 * Interface: CLI and Streamlit (Web UI)
 
 ---
-
+ 
 ## Project Structure
 
 ```

@@ -5,7 +5,7 @@ from main import pass_to_cipher, cipher_to_pass
 
 st.title("Cipher Vault")
 
-
+ 
 # ---------------- ADD PASSWORD ----------------
 
 st.header("Add New Password")

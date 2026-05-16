@@ -4,7 +4,7 @@ from db import insert_password, fetch_all_passwords, fetch_by_website
 from main import pass_to_cipher, cipher_to_pass
 
 st.title("Cipher Vault")
-
+ 
  
 # ---------------- ADD PASSWORD ----------------
 
